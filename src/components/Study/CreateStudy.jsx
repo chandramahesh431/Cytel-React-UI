@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Button, Modal, Form, Row, Col } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
-import axios from 'axios'
+
 
 function CreateStudy(props) {
     const [studyStartDate, setStudyStartDate] = useState()
@@ -17,8 +17,6 @@ function CreateStudy(props) {
     const secondaryIndication = useRef(null)
 
     const handleSubmit = async () => {
-
-
         const study_name = studyName.current.value
         const protocol_id = protocolID.current.value
         const study_start_date = moment(studyStartDate).format('YYYY-MM-DD')
@@ -31,44 +29,15 @@ function CreateStudy(props) {
         const secondary_indication = secondaryIndication.current.value
 
         if (study_name && study_start_date) {
-
-          //  const url = "https://localhost:44391/api/studies"
-            const url = "http://cytelwebapitest.ap-south-1.elasticbeanstalk.com/api/studies"
-         
-
-            const result = await axios({
-                url,
-                method: 'POST',
-                data: JSON.stringify({
-                    "studyName": study_name,
-                    "studyStartDate": study_start_date,
-                    "estimatedCompletionDate": study_completion_date,
-                    "protocolID": protocol_id,
-                    "studyGroup": study_group,
-                    "phase": phase,
-                    "primaryIndication": primary_indication,
-                    "secondaryIndication": secondary_indication
-                }),
-                headers: {
-                    "Accept": "application/json",
-                    "Content-Type": "application/json"
-                },
-            })
-            if (result.statusText) {
-                return result.data
-            } else {
-                throw new Error('Something went wrong')
-            }
-
             props.handleSubmit({
-                study_name,
-                study_start_date,
-                study_completion_date,
-                protocol_id,
-                study_group,
-                phase,
-                primary_indication,
-                secondary_indication,
+                "studyName": study_name,
+                "studyStartDate": study_start_date,
+                "estimatedCompletionDate": study_completion_date,
+                "protocolID": protocol_id,
+                "studyGroup": study_group,
+                "phase": phase,
+                "primaryIndication": primary_indication,
+                "secondaryIndication": secondary_indication
             })
         }
     }

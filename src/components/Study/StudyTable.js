@@ -9,6 +9,9 @@ import {
     Table,
 } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import moment from 'moment'
+
+
 
 export default function StudyTable(props) {
     const studies = useSelector(state => state.studyReducer.studies)
@@ -19,22 +22,9 @@ export default function StudyTable(props) {
         data: []
     })
 
-
-    useEffect(async () => {
-
-       // const url = `https://localhost:44391/api/studies`
-       const url = 'http://cytelwebapitest.ap-south-1.elasticbeanstalk.com/api/studies'
-        const result = await fetch(url, {
-            method: 'GET'
-        });
-
-        if (result.ok) {
-            const data = await result.json();
-            setStudies({ count: data.length, data: data })
-        } else {
-            throw new Error('Api failure')
-        }
-    }, []);
+    useEffect(() => {
+        dispatch({ type: "SET_STUDIES" });
+    }, [dispatch]);
 
     return (
         <React.Fragment>
@@ -77,7 +67,7 @@ export default function StudyTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {_studies.data.map(rowData => (
+                    {studies && studies.map(rowData => (
                         <tr key={rowData.id}>
                             {/* <td>{rowData.study_name}</td>
                             <td>{rowData.study_start_date}</td>
@@ -88,9 +78,9 @@ export default function StudyTable(props) {
                             <td>{rowData.primary_indication}</td>
                             <td>{rowData.secondary_indication}</td> */}
                             <td>{rowData.studyName}</td>
-                            <td>{rowData.studyStartDate}</td>
+                            <td>{moment(rowData.studyStartDate).format("YYYY-MM-DD")}</td>
                             <td>
-                                {rowData.estimatedCompletionDate}
+                                {moment(rowData.estimatedCompletionDate).format("YYYY-MM-DD")}
                             </td>
                             <td>{rowData.protocolID}</td>
                             <td>{rowData.studyGroup}</td>
