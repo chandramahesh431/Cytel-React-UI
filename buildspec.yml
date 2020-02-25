@@ -12,7 +12,7 @@ phases:
     commands:
      # Clear S3 bucket.
       - aws s3 rm s3://cytel-react-application-poc --recursive
-      - echo S3 bucket is cleared.    
+      - echo S3 Bucket got cleared   
 
 artifacts:
   files:
