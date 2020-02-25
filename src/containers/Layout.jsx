@@ -32,7 +32,7 @@ const Layout = () => {
                     <div className="aside-left">
                         <ListGroup variant="flush">
                             <ListGroup.Item className="active">
-                                Home
+                                Home test
                             </ListGroup.Item>
                             <ListGroup.Item>About</ListGroup.Item>
                         </ListGroup>
