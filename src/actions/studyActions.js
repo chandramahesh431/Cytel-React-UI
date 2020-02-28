@@ -4,25 +4,26 @@ import { header } from '../lib/Helper'
 
 export const getStudies = async () => {
     //const url = getAPI('getStudies')
- //   const url = "https://localhost:44391/api/studies";
-    const url = "http://cyteltopapi-dev.ap-south-1.elasticbeanstalk.com/api/studies";
+    //   const url = "https://localhost:44391/api/studies";
+    const url =
+        'http://cyteltopapi-dev.ap-south-1.elasticbeanstalk.com/api/studies'
     const result = await axios({
         url,
         method: 'GET',
     })
-  
+
     if (result) {
-        return result.data;
+        return result.data
     } else {
         throw new Error('Something went wrong')
     }
 }
 
 export const createStudy = async study => {
-
     //const url = getAPI('createStudies')
-   //  const url = "https://localhost:44391/api/studies";
-    const url = "http://cyteltopapi-dev.ap-south-1.elasticbeanstalk.com/api/studies";
+    //const url = 'https://localhost:44391/api/studies'
+    const url =
+        'http://cyteltopapi-dev.ap-south-1.elasticbeanstalk.com/api/studies'
     const result = await axios({
         url,
         method: 'POST',
@@ -37,7 +38,9 @@ export const createStudy = async study => {
 }
 
 export const deleteStudy = async id => {
-    let url = "http://cyteltopapi-dev.ap-south-1.elasticbeanstalk.com/Cytel/DeleteById?id=" + id;
+    let url =
+        'http://cyteltopapi-dev.ap-south-1.elasticbeanstalk.com/Cytel/DeleteById?id=' +
+        id
     //url = `${url}/${id}`
     const result = await axios({
         url,
